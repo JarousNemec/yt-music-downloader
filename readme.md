@@ -53,15 +53,15 @@ python main.py
 ## 🧱 Build a Standalone .exe
 To package the app as a standalone Windows executable, use PyInstaller:
 
-Install PyInstaller:
+Install Nuitka:
 
 ```javascript
-pip install pyinstaller
+pip install nuitka
 ```
 Build the app:
 
 ```javascript
-pyinstaller --onefile --noconsole --add-data "venv/Lib/site-packages/ytmusicapi;ytmusicapi" --add-data "venv/Lib/site-packages/yt_dlp;yt_dlp" --name "ytmusic-downloader" main.py
+python -m nuitka --onefile --lto=no --remove-output --nofollow-import-to=yt_dlp.extractor.lazy_extractors --assume-yes-for-downloads --enable-plugin=tk-inter --windows-console-mode=disable --include-data-dir=venv/Lib/site-packages/ytmusicapi=ytmusicapi --include-data-dir=venv/Lib/site-packages/yt_dlp=yt_dlp --output-filename=ytmusic-downloader.exe main.py
 ```
 ⚠️ On Linux/Mac, replace ; with : in --add-data paths.
 
